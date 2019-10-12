@@ -1,0 +1,27 @@
+{
+  "name": "wechat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KelvinKey/node-wechat.git"
+  },
+  "author": [
+    {
+      "name": "kelvinkey",
+      "email": "kelvinkeyss@yahoo.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KelvinKey/node-wechat/issues"
+  },
+  "homepage": "https://github.com/KelvinKey/node-wechat#readme",
+  "dependencies": {
+    "http": "0.0.0"
+  }
+}
