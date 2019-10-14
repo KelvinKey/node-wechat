@@ -1,0 +1,11 @@
+{
+    "appID": "xxxxxxxxxxxxxxxxxxx",
+    "AppSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    
+    "prefix": "https://api.weixin.qq.com/cgi-bin",
+    "apiURL": {
+        "accessTokenApi": "%s/token?grant_type=client_credential&appid=%s&secret=%s",
+        "ticket": "%s/ticket/getticket?access_token=%s&type=jsapi"
+    }
+}
