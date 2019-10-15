@@ -6,6 +6,8 @@ const sha1 = require('sha1');
 const _Token = require('../BasicSupport/AccessToken/accesstoken');
 const _Ticket = require('../BasicSupport/AccessTicket/accessticket');
 const config = require(__dirname.split('src')[0] + 'config.json');
+const xmlToJson = require('fast-xml-parser');
+const message = require('../Kernel/Messagemanage/message');
 
 
 /**Configuration information */
@@ -25,7 +27,18 @@ router.get('/get', async ctx => {
     let ticket = await _Ticket.fetchTicket(_Token.access_token);
     let params = sort.sign(ticket.ticket, ctx.href);
     console.log(ticket.ticket + "-------" + params.signature)
-    // ctx.body = ejs.render(xml, params);
+    // ctx.body
+});
+
+/**message manage */
+router.post('/', async ctx => {
+    //通过raw-body模块接收接口传过来的xml数据
+    let data = await rawBody(ctx.req, { length: ctx.length, limit: '1mb', encoding: ctx.charset });
+
+    let jsonObj = xmlToJson.parse(data.toString());
+    ctx.status = 200;
+    ctx.type = 'application/xml';
+    ctx.body = await message.reply(jsonObj.xml);;
 });
 
 

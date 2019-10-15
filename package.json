@@ -23,6 +23,7 @@
   "homepage": "https://github.com/KelvinKey/node-wechat#readme",
   "dependencies": {
     "bluebird": "^3.7.0",
+    "fast-xml-parser": "^3.13.0",
     "fs": "0.0.1-security",
     "http": "0.0.0",
     "koa": "^2.10.0",
