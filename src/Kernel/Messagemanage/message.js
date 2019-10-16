@@ -1,9 +1,10 @@
 'use strict'
 
+const imageport = require('../ImagePort/imageport')
 
 const util = {
     NowTime: new Date().getTime(),
-    reply: async $message => {
+    reply: async ($message, $token) => {
         let replys = '<xml>' +
             '<ToUserName><![CDATA[' + $message.FromUserName + ']]></ToUserName>' +
             '<FromUserName><![CDATA[' + $message.ToUserName + ']]></FromUserName>' +
@@ -35,10 +36,19 @@ const util = {
         } else if ($message.MsgType == "text") {
             if ($message.Content == 1) {
                 replys += '<MsgType><![CDATA[' + $message.MsgType + ']]></MsgType>' +
-                    '<Content><![CDATA[哇~你还真的想吐槽奥...]]></Content>' +
+                    '<Content><![CDATA[哇瑟~这么乖,尝试点点其他的数字奥~~~]]></Content>' +
+                    '</xml>';
+            } else if ($message.Content == 2) {
+
+              console.log(imageport.getMaterialImgUrl($token));
+
+            } else {
+                replys += '<MsgType><![CDATA[' + $message.MsgType + ']]></MsgType>' +
+                    '<Content><![CDATA[嘤嘤嘤~~不知道客官在讲什么奥~~~]]></Content>' +
                     '</xml>';
             }
         } else if ($message.MsgType == "image") {//图片
+
             replys += '<MsgType><![CDATA[text]]></MsgType>' +
                 '<Content><![CDATA[哇~~~ 你的审美有点东西奥~]]></Content>' +
                 '</xml>';

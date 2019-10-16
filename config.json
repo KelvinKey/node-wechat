@@ -4,8 +4,11 @@
     "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxx",
     
     "prefix": "https://api.weixin.qq.com/cgi-bin",
+    "bing": "https://bing.ioliu.cn/v1/rand?type=json",
     "apiURL": {
         "accessTokenApi": "%s/token?grant_type=client_credential&appid=%s&secret=%s",
-        "ticket": "%s/ticket/getticket?access_token=%s&type=jsapi"
+        "ticket": "%s/ticket/getticket?access_token=%s&type=jsapi",
+        "getImgUrl": "%s/media/uploadimg?access_token=%s",
+        "upload": "%s/media/upload?&access_token=%s&type=image"
     }
 }

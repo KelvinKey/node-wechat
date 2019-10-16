@@ -9,7 +9,6 @@ const config = require(__dirname.split('src')[0] + 'config.json');
 const xmlToJson = require('fast-xml-parser');
 const message = require('../Kernel/Messagemanage/message');
 
-
 /**Configuration information */
 router.get('/', async res => {
 
@@ -38,7 +37,7 @@ router.post('/', async ctx => {
     let jsonObj = xmlToJson.parse(data.toString());
     ctx.status = 200;
     ctx.type = 'application/xml';
-    ctx.body = await message.reply(jsonObj.xml);;
+    ctx.body = await message.reply(jsonObj.xml, _Token.access_token);;
 });
 
 
