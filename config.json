@@ -8,7 +8,8 @@
     "apiURL": {
         "accessTokenApi": "%s/token?grant_type=client_credential&appid=%s&secret=%s",
         "ticket": "%s/ticket/getticket?access_token=%s&type=jsapi",
-        "getImgUrl": "%s/media/uploadimg?access_token=%s",
-        "upload": "%s/media/upload?&access_token=%s&type=image"
+        "getImgUrl": "%s/material/add_material?access_token=%s",
+        "upload": "%s/media/upload?access_token=%s&type=image",
+        "fetch": "%s/material/get_material?access_token=%s"
     }
 }

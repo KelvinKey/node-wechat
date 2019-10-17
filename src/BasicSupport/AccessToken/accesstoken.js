@@ -20,7 +20,6 @@ const weChat = {
         let $url = util.format(config.apiURL.accessTokenApi, config.prefix, config.appID, config.AppSecret);
 
         return new Promise((resolve, reject) => {
-            console.log(__dirname +"?")
             fs.readFile(__dirname + '/token.txt', { flag: 'r+', encoding: 'utf8' }, (err, data) => {
                 if (err) {
                     console.log(err);
@@ -28,8 +27,7 @@ const weChat = {
                 }
                 if (data.length != 0 && eval('(' + data + ')').expires_in > (new Date().getTime())) {
                     weChat.access_token = eval('(' + data + ')').access_token || '';
-                    resolve(data);
-                    console.log(data);
+                    resolve(data);                
                 } else {
                     request({ url: $url, json: true }).then(response => {
                         let $ = response.body;
@@ -37,13 +35,7 @@ const weChat = {
                         $.expires_in = new Date().getTime() + 7100 * 1000;
 
                         fs.writeFile(__dirname + '/token.txt', JSON.stringify($), { flag: 'w' }, err => {
-                            if (err) {
-                                console.log(err);
-                                reject(err);
-                            } else {
-                                console.log($)
-                                resolve($);
-                            }
+                            err ? reject(err) : resolve($);
                         });
                     })
                 }

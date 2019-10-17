@@ -40,7 +40,15 @@ const util = {
                     '</xml>';
             } else if ($message.Content == 2) {
 
-              console.log(imageport.getMaterialImgUrl($token));
+                imageport.getMaterialImgUrl($token).then(data => {
+
+                    replys += '<MsgType><![CDATA[image]]></MsgType>' +
+                        '<Image>' +
+                        '<MediaId><![CDATA[' + data.media_id + ']]></MediaId>' +
+                        '</Image>' +
+                        '</xml>';
+                })
+
 
             } else {
                 replys += '<MsgType><![CDATA[' + $message.MsgType + ']]></MsgType>' +

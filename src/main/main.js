@@ -3,6 +3,7 @@
 const router = require('koa-router')();
 const rawBody = require('raw-body');
 const sha1 = require('sha1');
+const fs = require('fs');
 const _Token = require('../BasicSupport/AccessToken/accesstoken');
 const _Ticket = require('../BasicSupport/AccessTicket/accessticket');
 const config = require(__dirname.split('src')[0] + 'config.json');
@@ -17,12 +18,12 @@ router.get('/', async res => {
     res.body = (hash == res.query.signature || '') ? (res.query.echostr || '') + '' : 'failed';
 
     _Token.fetchAccessToken();
-
     console.log(hash + "==" + res.query.signature);
 });
 
 /**get fetch Ticket */
 router.get('/get', async ctx => {
+
     let ticket = await _Ticket.fetchTicket(_Token.access_token);
     let params = sort.sign(ticket.ticket, ctx.href);
     console.log(ticket.ticket + "-------" + params.signature)
@@ -31,13 +32,14 @@ router.get('/get', async ctx => {
 
 /**message manage */
 router.post('/', async ctx => {
+
     //通过raw-body模块接收接口传过来的xml数据
     let data = await rawBody(ctx.req, { length: ctx.length, limit: '1mb', encoding: ctx.charset });
 
     let jsonObj = xmlToJson.parse(data.toString());
     ctx.status = 200;
     ctx.type = 'application/xml';
-    ctx.body = await message.reply(jsonObj.xml, _Token.access_token);;
+    ctx.body = await message.reply(jsonObj.xml, _Token.access_token);
 });
 
 
@@ -63,8 +65,7 @@ const sort = {
     /**生成时间戳 */
     createTimestamp: () => {
         return parseInt(new Date().getTime() / 1000);
-    },
-
+    }
 }
 
 module.exports = router;
