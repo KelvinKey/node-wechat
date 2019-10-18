@@ -75,7 +75,38 @@ const port = {
                     reject(err)
                 })
         });
-    }
+    },
+
+    /**上传素材的方法 */
+    uploadMaterial: (type, material, permanent, token) => {
+
+        return new Promise((resolve, reject) => {
+
+            let formData = { media: material, access_token: token };
+            let options = { method: 'POST', url: util.format(config.permanent.upload, config.prefix, token), formData: formData, json: true };
+
+            port.httpRequest(options, 'uploadMaterial').then(data => {
+                console.log(data)
+                port.fetchMaterial('image', data.media_id, {}, token).then(res => {
+
+                    console.log(res)
+                    resolve(res);
+                }).catch(err => {
+                    reject(err);
+                });
+            }).catch(err => {
+                reject(err);
+            });
+        })
+    },
+
+
+    // port.uploadMaterial('image', port.WallpaperPicture(), {}, $token).then(data => {
+    //     console.log(data)
+    //     resolve(data);
+    // }).catch(err => {
+    //     reject(err);
+    // });
 }
 
 module.exports = port;
