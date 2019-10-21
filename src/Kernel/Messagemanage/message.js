@@ -50,22 +50,17 @@ const util = {
                     '<Content><![CDATA[哇瑟~这么乖,尝试点点其他的数字奥~~~]]></Content>' +
                     '</xml>';
             } else if ($message.Content == 2) {
-
-                imageport.getMaterialImgUrl($token).then(data => {
-                    //TODO
-                });
-
+                let MediaId = await imageport.getMaterialImgUrl($token);
+                
                 replys = '<xml>' +
                     '<ToUserName><![CDATA[' + $message.FromUserName + ']]></ToUserName>' +
                     '<FromUserName><![CDATA[' + $message.ToUserName + ']]></FromUserName>' +
                     '<CreateTime>' + util.NowTime + '</CreateTime>' +
                     '<MsgType><![CDATA[image]]></MsgType>' +
                     '<Image>' +
-                    '<MediaId><![CDATA[' + 1 + ']]></MediaId>' +
+                    '<MediaId><![CDATA[' + MediaId.media_id + ']]></MediaId>' +
                     '</Image>' +
                     '</xml>';
-
-                console.log(replys)
             } else {
                 replys = '<xml>' +
                     '<ToUserName><![CDATA[' + $message.FromUserName + ']]></ToUserName>' +
