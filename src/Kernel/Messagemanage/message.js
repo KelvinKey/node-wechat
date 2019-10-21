@@ -38,20 +38,30 @@ const util = {
                     '<MsgType><![CDATA[text]]></MsgType>' +
                     '<Content><![CDATA[你扫了我公众号的二维码奥~]]></Content>' +
                     '</xml>';
-            }
-
-        } else if ($message.MsgType == "text") {
-            if ($message.Content == 1) {
+            } else if ($message.Event === 'pic_sysphoto') {  //系统拍照发图
                 replys = '<xml>' +
                     '<ToUserName><![CDATA[' + $message.FromUserName + ']]></ToUserName>' +
                     '<FromUserName><![CDATA[' + $message.ToUserName + ']]></FromUserName>' +
                     '<CreateTime>' + util.NowTime + '</CreateTime>' +
-                    '<MsgType><![CDATA[' + $message.MsgType + ']]></MsgType>' +
-                    '<Content><![CDATA[哇瑟~这么乖,尝试点点其他的数字奥~~~]]></Content>' +
+                    '<MsgType><![CDATA[text]]></MsgType>' +
+                    '<Content><![CDATA[哇c,你拍的照片好美呀!]]></Content>' +
                     '</xml>';
-            } else if ($message.Content == 2) {
+            } else if ($message.Event === 'pic_photo_or_album') {  //拍照或者相册发图
+
+                replys = '<xml>' +
+                    '<ToUserName><![CDATA[' + $message.FromUserName + ']]></ToUserName>' +
+                    '<FromUserName><![CDATA[' + $message.ToUserName + ']]></FromUserName>' +
+                    '<CreateTime>' + util.NowTime + '</CreateTime>' +
+                    '<MsgType><![CDATA[text]]></MsgType>' +
+                    '<Content><![CDATA[哇,你拍的照片很不错哟~~]]></Content>' +
+                    '</xml>';
+            }
+
+        } else if ($message.MsgType == "text") {
+            if ($message.Content == 1) {
                 let MediaId = await imageport.getMaterialImgUrl($token);
-                
+                console.log(MediaId);
+
                 replys = '<xml>' +
                     '<ToUserName><![CDATA[' + $message.FromUserName + ']]></ToUserName>' +
                     '<FromUserName><![CDATA[' + $message.ToUserName + ']]></FromUserName>' +
@@ -61,7 +71,21 @@ const util = {
                     '<MediaId><![CDATA[' + MediaId.media_id + ']]></MediaId>' +
                     '</Image>' +
                     '</xml>';
-            } else {
+
+            } else if ($message.Content == 2) {
+
+                replys = '';
+
+            } else if ($message.Content == 3) {
+                replys = '<xml>' +
+                    '<ToUserName><![CDATA[' + $message.FromUserName + ']]></ToUserName>' +
+                    '<FromUserName><![CDATA[' + $message.ToUserName + ']]></FromUserName>' +
+                    '<CreateTime>' + util.NowTime + '</CreateTime>' +
+                    '<MsgType><![CDATA[' + $message.MsgType + ']]></MsgType>' +
+                    '<Content><![CDATA[哇瑟~这么乖,尝试点点其他的数字奥~~~]]></Content>' +
+                    '</xml>';
+            }
+            else {
                 replys = '<xml>' +
                     '<ToUserName><![CDATA[' + $message.FromUserName + ']]></ToUserName>' +
                     '<FromUserName><![CDATA[' + $message.ToUserName + ']]></FromUserName>' +
